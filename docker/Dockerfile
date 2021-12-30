@@ -13,6 +13,10 @@ RUN apt -y update && \
 RUN mkdir /app
 
 # Copy the relevant application files
+COPY notraffic /app/notraffic
+COPY requirements.txt /app/requirements.txt
+COPY manage.py /app/manage.py
+COPY db.sqlite3 /app/db.sqlite3
 
 RUN useradd -ms /bin/bash app && \
     chown -R app:app /app
@@ -20,6 +24,11 @@ RUN useradd -ms /bin/bash app && \
 USER app
 WORKDIR /app
 
-# Install the python requirements
+RUN pip install -r requirements.txt
+
+EXPOSE 8000
 
 # Run the application
+CMD python3 manage.py makemigrations
+CMD python3 manage.py migrate app
+CMD python3 manage.py runserver 0.0.0.0:8000
