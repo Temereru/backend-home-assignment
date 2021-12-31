@@ -16,6 +16,8 @@ RUN mkdir /app
 COPY notraffic /app/notraffic
 COPY requirements.txt /app/requirements.txt
 COPY manage.py /app/manage.py
+# Needed to copy the db file, otherwise it was created in the docker with no tables,
+# and I didn't manage to find the reason for that.
 COPY db.sqlite3 /app/db.sqlite3
 
 RUN useradd -ms /bin/bash app && \

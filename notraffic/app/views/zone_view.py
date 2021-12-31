@@ -113,6 +113,9 @@ class ZoneView(View):
         try:
             zone = Zone.objects.get(pk=zone_to_edit[api_id])
 
+            if api_name in zone_to_edit:
+                zone.name = zone_to_edit[api_name]
+
             if api_min_x in zone_to_edit:
                 zone.min_x = zone_to_edit[api_min_x]
 
@@ -166,14 +169,14 @@ class ZoneView(View):
                     return HttpResponse(NotrafficApiResponseBody(result, []).to_json(), status=200,
                                  headers=json_header)
             else:
-                return HttpResponse(NotrafficApiResponseBody([], [validation_error]).to_json(), status=400,
+                return HttpResponse(NotrafficApiResponseBody(None, [validation_error]).to_json(), status=400,
                                     headers=json_header)
         else:
-            return HttpResponse(NotrafficApiResponseBody([], [api_error_illegal_put_body]).to_json(), status=400,
+            return HttpResponse(NotrafficApiResponseBody(None, [api_error_illegal_put_body]).to_json(), status=400,
                                 headers=json_header)
 
     def delete(self, request, *args, **kwargs):
-        if request.GET.get(api_ids, '') == '':
+        if request.GET.get(api_ids, None) == '':
             return HttpResponse(NotrafficApiResponseBody(None, [api_error_illegal_query_ids]).to_json(), status=400,
                                 headers=json_header)
 
