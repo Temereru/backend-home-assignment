@@ -1,6 +1,5 @@
 import pytest
 import requests
-import json
 
 HOST = 'localhost'
 PORT = 8000

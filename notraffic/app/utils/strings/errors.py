@@ -1,0 +1,12 @@
+validation_error_is_required = '{0} is required'
+validation_error_empty_string = '{0} needs to be a non empty string at max length of {1}'
+validation_error_wrong_int = '{0} needs to be an integer larger or equal to 0'
+validation_error_need_to_be_larger = '{0} needs to be larger than {1}'
+
+api_error_validation_error_for = 'validation error for zone with {0} {1}: {2}'
+api_error_not_found = 'item with id: {0} was not found'
+api_error_illegal_post_body = 'body needs to be a full zone object'
+api_error_illegal_put_body = 'body needs to be a zone updates dictionary, or a list of zone updates dictionaries'
+api_error_zone_not_found = 'Zone not found for id: {0}'
+api_error_illegal_query_ids = 'ids must be a string of comma separated integers'
+api_error_delete_unknown = 'must specify items to delete'
